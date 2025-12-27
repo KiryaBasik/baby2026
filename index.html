@@ -30,24 +30,28 @@
       /* ВОТ ЭТОТ БЛОК РЕШАЕТ ПРОБЛЕМУ НА АЙФОНЕ */
       body::before {
         content: "";
-        position: fixed; /* Фиксируем фон относительно экрана */
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%; /* Растягиваем на весь экран */
-        z-index: -1; /* Кладем ПОД контент */
+
+        /* ИСПРАВЛЕНИЕ ЗУМА: */
+        height: 100vh; /* Запасной вариант для старых телефонов */
+        height: 100svh; /* ГЛАВНОЕ: Высота экрана без учета исчезающей строки */
+
+        z-index: -1;
 
         background-repeat: no-repeat;
         background-position: center top;
         background-size: cover;
 
-        /* Картинка для ПК */
+        /* Картинка для ПК (по умолчанию) */
         background-image: url("assets/images/backforpc.png");
 
-        /* Исправление дерганья на мобилках */
-        will-change: transform;
+        /* Отключаем любые анимации трансформации на фоне */
+        transition: none;
+        will-change: auto;
       }
-
       @media (max-width: 768px) {
         /* Меняем картинку только в слое фона */
         body::before {
