@@ -37,6 +37,10 @@
       @media (max-width: 768px) {
         body {
           background-image: url("assets/images/backformob.png");
+          /* ИСПРАВЛЕНИЕ ДЛЯ IPHONE: */
+          background-attachment: scroll; /* Отключаем фиксацию, чтобы картинка не зумилась */
+          background-position: center top;
+          background-size: 100% auto; /* Или cover, но scroll обязательно нужен */
         }
       }
 
