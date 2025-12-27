@@ -6,10 +6,12 @@
     <title>Первый годик</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,600;1,400&family=Marck+Script&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -501,7 +503,9 @@
         </div>
 
         <div>
-          <a href="https://wa.me/77771234567" class="gift-btn">Я приду!</a>
+          <a href="https://wa.me/77771234567" class="gift-btn" id="fireworkBtn"
+            >Я приду!</a
+          >
         </div>
 
         <div>
@@ -583,6 +587,54 @@
             behavior: "smooth",
           });
         });
+      });
+      // --- ЛОГИКА САЛЮТА ---
+      const fireworkBtn = document.getElementById("fireworkBtn");
+
+      fireworkBtn.addEventListener("click", function (e) {
+        e.preventDefault(); // Блокируем переход (WhatsApp не откроется)
+
+        // Запускаем салют (конфетти)
+        const duration = 2000;
+        const animationEnd = Date.now() + duration;
+        const defaults = {
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 9999,
+        };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+
+          // Розовые и голубые частицы
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+              colors: ["#89CFF0", "#F4C2C2"],
+            })
+          );
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+              colors: ["#89CFF0", "#F4C2C2"],
+            })
+          );
+        }, 250);
+
+        // Таймер перехода удален. Вы останетесь на странице.
       });
     </script>
   </body>
