@@ -20,27 +20,43 @@
       body {
         font-family: "Cormorant Infant", serif;
         background-color: #fff;
-        background-repeat: no-repeat;
-        background-position: center top;
-        background-size: cover;
-        background-attachment: fixed;
         color: #8b7e74;
         overflow: hidden;
         opacity: 0;
         transition: opacity 1.5s ease-in-out;
+        /* ВАЖНО: Убираем background-image отсюда, он переехал в body::before */
       }
 
-      body {
+      /* ВОТ ЭТОТ БЛОК РЕШАЕТ ПРОБЛЕМУ НА АЙФОНЕ */
+      body::before {
+        content: "";
+        position: fixed; /* Фиксируем фон относительно экрана */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; /* Растягиваем на весь экран */
+        z-index: -1; /* Кладем ПОД контент */
+
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+
+        /* Картинка для ПК */
         background-image: url("assets/images/backforpc.png");
+
+        /* Исправление дерганья на мобилках */
+        will-change: transform;
       }
 
       @media (max-width: 768px) {
-        body {
+        /* Меняем картинку только в слое фона */
+        body::before {
           background-image: url("assets/images/backformob.png");
-          /* ИСПРАВЛЕНИЕ ДЛЯ IPHONE: */
-          background-attachment: scroll; /* Отключаем фиксацию, чтобы картинка не зумилась */
-          background-position: center top;
-          background-size: 100% auto; /* Или cover, но scroll обязательно нужен */
+        }
+
+        /* Гарантируем, что у самого body фона нет */
+        body {
+          background-image: none;
         }
       }
 
