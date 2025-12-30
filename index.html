@@ -397,6 +397,32 @@
       .align-right {
         text-align: right; /* Выравнивает содержимое по правому краю */
       }
+      .parents-signature {
+        margin-top: 10px;
+        margin-bottom: -10px; /* Немного прижимаем к кнопке для целостности */
+      }
+
+      .waiting-text {
+        font-size: 1.4rem;
+        color: #8b7e74;
+        margin-bottom: 5px;
+      }
+
+      .parents-names {
+        font-family: "Marck Script", cursive;
+        font-size: 2.8rem;
+        color: #a09893;
+        line-height: 1.1;
+      }
+
+      @media (max-width: 480px) {
+        .waiting-text {
+          font-size: 1.2rem;
+        }
+        .parents-names {
+          font-size: 2.4rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -508,7 +534,10 @@
             розовые или<br />бежевые оттенки!
           </p>
         </div>
-
+        <div class="scroll-reveal parents-signature">
+          <p class="waiting-text">Мы вас ждём,</p>
+          <p class="parents-names">Валерия и Никита</p>
+        </div>
         <div>
           <a href="https://wa.me/77771234567" class="gift-btn" id="fireworkBtn"
             >Я приду!</a
